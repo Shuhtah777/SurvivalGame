@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SurvivalGame.Pages.MedicalPage"
+    Title="Медпункт">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#0A130E" Offset="0.0"/>
+            <GradientStop Color="#13241A" Offset="0.45"/>
+            <GradientStop Color="#1E2A1A" Offset="0.8"/>
+            <GradientStop Color="#2A2217" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="Moss">#9CCB6B</Color>
+            <Color x:Key="Fire">#F2A541</Color>
+            <Color x:Key="Parchment">#EFE3C8</Color>
+            <Color x:Key="BarkLight">#6B5236</Color>
+            <Color x:Key="PanelGreen">#1A2E20</Color>
+            <Color x:Key="PanelStroke">#3F6B45</Color>
+
+            <Style x:Key="ActionStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Parchment}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HeightRequest" Value="38"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="Padding" Value="8,0"/>
+            </Style>
+
+            <Style x:Key="UpgradeStyle" TargetType="Button" BasedOn="{StaticResource ActionStyle}">
+                <Setter Property="BackgroundColor" Value="#4F7A3F"/>
+                <Setter Property="BorderColor" Value="#7DB35F"/>
+                <Setter Property="HeightRequest" Value="34"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="WidthRequest" Value="140"/>
+            </Style>
+
+            <Style x:Key="SectionTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="{StaticResource Moss}"/>
+                <Setter Property="CharacterSpacing" Value="2"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+            <Style x:Key="SkillLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource Parchment}"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="12,8" Spacing="8">
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                <Label Text="🌿" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="✚ МЕДПУНКТ"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       CharacterSpacing="3"
+                       TextColor="{StaticResource Parchment}"
+                       VerticalOptions="Center"/>
+                <Label Text="🌿" FontSize="22" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <Border BackgroundColor="{StaticResource PanelGreen}"
+                    Stroke="{StaticResource PanelStroke}"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,6">
+                <Label x:Name="InventoryLabel"
+                       Text=""
+                       FontSize="13"
+                       TextColor="{StaticResource Parchment}"/>
+            </Border>
+
+            <Border BackgroundColor="#16241A"
+                    Stroke="{StaticResource BarkLight}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,8">
+                <VerticalStackLayout Spacing="6">
+
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label Grid.Column="0"
+                               Text="⭐ ПРОКАЧКА ГРАВЦЯ"
+                               Style="{StaticResource SectionTitle}"
+                               TextColor="#B5E48C"/>
+                        <Label x:Name="SkillPointsLabel"
+                               Grid.Column="1"
+                               Text="Очки розвитку: 3"
+                               TextColor="#FFD166"
+                               FontSize="13"
+                               FontAttributes="Bold"
+                               VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label x:Name="LiteracyLabel"
+                               Grid.Column="0"
+                               Text="📚 Начитаність: 0/5"
+                               Style="{StaticResource SkillLabel}"/>
+                        <Button Grid.Column="1"
+                                Text="⬆ Начитаність"
+                                Style="{StaticResource UpgradeStyle}"
+                                Clicked="OnUpgradeLiteracyClicked"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label x:Name="CamouflageLabel"
+                               Grid.Column="0"
+                               Text="🌿 Маскування: 0/5"
+                               Style="{StaticResource SkillLabel}"/>
+                        <Button Grid.Column="1"
+                                Text="⬆ Маскування"
+                                Style="{StaticResource UpgradeStyle}"
+                                Clicked="OnUpgradeCamouflageClicked"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                        <Label x:Name="LuckLabel"
+                               Grid.Column="0"
+                               Text="🍀 Успіх: 0/5"
+                               Style="{StaticResource SkillLabel}"/>
+                        <Button Grid.Column="1"
+                                Text="⬆ Успіх"
+                                Style="{StaticResource UpgradeStyle}"
+                                Clicked="OnUpgradeLuckClicked"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#2A2217"
+                    Stroke="{StaticResource BarkLight}"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,8">
+                <VerticalStackLayout Spacing="6">
+
+                    <Label Text="🧪 ВИГОТОВЛЕННЯ АПТЕЧКИ"
+                           Style="{StaticResource SectionTitle}"
+                           TextColor="{StaticResource Fire}"/>
+
+                    <Label Text="Потрібно від 5 до 10 лікарських трав. Успішно пройди тест точності, щоб отримати аптечку."
+                           TextColor="{StaticResource Parchment}"
+                           FontSize="12"/>
+
+                    <Button x:Name="StartButton"
+                            Text="🧪 Почати виготовлення"
+                            Style="{StaticResource ActionStyle}"
+                            BackgroundColor="#7A5A2E"
+                            BorderColor="#C99A4B"
+                            Clicked="OnStartCraftingClicked"/>
+
+                    <Label x:Name="SkillTargetLabel"
+                           Text="Ціль: —"
+                           IsVisible="False"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#B5E48C"
+                           HorizontalOptions="Center"/>
+
+                    <Slider x:Name="SkillSlider"
+                            Minimum="0"
+                            Maximum="100"
+                            Value="50"
+                            MinimumTrackColor="#7DB35F"
+                            MaximumTrackColor="#3A2D20"
+                            ThumbColor="{StaticResource Fire}"
+                            IsVisible="False"/>
+
+                    <Label x:Name="SkillHintLabel"
+                           Text="Встанови повзунок ближче до цілі. Допустиме базове відхилення: ±8."
+                           IsVisible="False"
+                           FontSize="12"
+                           FontAttributes="Italic"
+                           TextColor="#B7C4A8"/>
+
+                    <Button x:Name="CheckButton"
+                            Text="Перевірити точність"
+                            Style="{StaticResource ActionStyle}"
+                            BackgroundColor="#24472A"
+                            BorderColor="#5FA060"
+                            IsVisible="False"
+                            Clicked="OnCheckSkillClicked"/>
+
+                    <Label x:Name="ResultLabel"
+                           Text=""
+                           FontSize="13"
+                           TextColor="{StaticResource Parchment}"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                <Button Grid.Column="0"
+                        Text="🩹 Аптечка"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#8A3B34"
+                        BorderColor="#C0665D"
+                        Clicked="OnUseMedkitClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="⌂ На базу"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#2F4A4A"
+                        BorderColor="#5E9A9A"
+                        Clicked="OnBackClicked"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

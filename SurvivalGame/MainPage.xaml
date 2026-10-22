@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SurvivalGame.MainPage"
+    Title="База">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#0A130E" Offset="0.0"/>
+            <GradientStop Color="#13241A" Offset="0.45"/>
+            <GradientStop Color="#1E2A1A" Offset="0.8"/>
+            <GradientStop Color="#2A2217" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="Moss">#9CCB6B</Color>
+            <Color x:Key="Fire">#F2A541</Color>
+            <Color x:Key="Parchment">#EFE3C8</Color>
+            <Color x:Key="Bark">#3A2D20</Color>
+            <Color x:Key="BarkLight">#6B5236</Color>
+            <Color x:Key="PanelGreen">#1A2E20</Color>
+            <Color x:Key="PanelStroke">#3F6B45</Color>
+
+            <Style x:Key="SlotStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Bark}"/>
+                <Setter Property="BorderColor" Value="{StaticResource BarkLight}"/>
+                <Setter Property="BorderWidth" Value="2"/>
+                <Setter Property="CornerRadius" Value="8"/>
+                <Setter Property="TextColor" Value="{StaticResource Parchment}"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="HeightRequest" Value="56"/>
+                <Setter Property="Padding" Value="1"/>
+            </Style>
+
+            <Style x:Key="ActionStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Parchment}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HeightRequest" Value="38"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="Padding" Value="4,0"/>
+            </Style>
+
+            <Style x:Key="SectionTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="{StaticResource Moss}"/>
+                <Setter Property="CharacterSpacing" Value="2"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="12,8" Spacing="8">
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                <Label Text="🌲" FontSize="22" VerticalOptions="Center" Opacity="0.8"/>
+                <Label Text="🏕️" FontSize="30" VerticalOptions="Center"/>
+                <Label Text="ТАБІР ВИЖИВАННЯ"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       CharacterSpacing="3"
+                       TextColor="{StaticResource Parchment}"
+                       VerticalOptions="Center"/>
+                <Label Text="🔥" FontSize="22" VerticalOptions="Center"/>
+                <Label Text="🌲" FontSize="22" VerticalOptions="Center" Opacity="0.8"/>
+            </HorizontalStackLayout>
+
+            <Border BackgroundColor="{StaticResource PanelGreen}"
+                    Stroke="{StaticResource PanelStroke}"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,6">
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                    <Label x:Name="HealthLabel"
+                           Grid.Column="0"
+                           Text="❤️ Здоров'я: 100 / 100"
+                           FontSize="13"
+                           TextColor="#FF9A8B"
+                           VerticalOptions="Center"/>
+
+                    <Label x:Name="HungerLabel"
+                           Grid.Column="1"
+                           Text="🍗 Голод: 100 / 100"
+                           FontSize="13"
+                           TextColor="{StaticResource Fire}"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <Border BackgroundColor="#16241A"
+                    Stroke="{StaticResource BarkLight}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="8">
+                <VerticalStackLayout Spacing="6">
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                        <Label Grid.Column="0"
+                               Text="📦 СКЛАД"
+                               Style="{StaticResource SectionTitle}"/>
+                        <Label Grid.Column="1"
+                               Text="Натисни на комірку, щоб забрати вміст"
+                               FontSize="11"
+                               FontAttributes="Italic"
+                               TextColor="#B7C4A8"
+                               LineBreakMode="TailTruncation"
+                               VerticalOptions="Center"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*,*"
+                          RowDefinitions="Auto,Auto,Auto"
+                          ColumnSpacing="5"
+                          RowSpacing="5">
+
+                        <Button x:Name="Slot0" Grid.Row="0" Grid.Column="0"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="0"/>
+
+                        <Button x:Name="Slot1" Grid.Row="0" Grid.Column="1"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="1"/>
+
+                        <Button x:Name="Slot2" Grid.Row="0" Grid.Column="2"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="2"/>
+
+                        <Button x:Name="Slot3" Grid.Row="1" Grid.Column="0"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="3"/>
+
+                        <Button x:Name="Slot4" Grid.Row="1" Grid.Column="1"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="4"/>
+
+                        <Button x:Name="Slot5" Grid.Row="1" Grid.Column="2"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="5"/>
+
+                        <Button x:Name="Slot6" Grid.Row="2" Grid.Column="0"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="6"/>
+
+                        <Button x:Name="Slot7" Grid.Row="2" Grid.Column="1"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="7"/>
+
+                        <Button x:Name="Slot8" Grid.Row="2" Grid.Column="2"
+                                Style="{StaticResource SlotStyle}"
+                                Clicked="OnStorageSlotClicked"
+                                CommandParameter="8"/>
+                    </Grid>
+
+                    <Label x:Name="StatusLabel"
+                           Text="Склад готовий до використання."
+                           TextColor="#B7C4A8"
+                           FontSize="12"
+                           LineBreakMode="TailTruncation"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*,*" ColumnSpacing="6">
+                <Button Grid.Column="0"
+                        Text="🎒 Скласти"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#4F7A3F"
+                        BorderColor="#7DB35F"
+                        Clicked="OnStoreAllClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="🫐 Ягоди"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#5B3A6B"
+                        BorderColor="#8E62A3"
+                        Clicked="OnEatBerriesClicked"/>
+
+                <Button Grid.Column="2"
+                        Text="🩹 Аптечка"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#8A3B34"
+                        BorderColor="#C0665D"
+                        Clicked="OnUseMedkitClicked"/>
+            </Grid>
+
+            <Border BackgroundColor="#2A2217"
+                    Stroke="{StaticResource BarkLight}"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,6">
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <Label Grid.Column="0"
+                           Text="🎒 РЮКЗАК"
+                           Style="{StaticResource SectionTitle}"
+                           TextColor="{StaticResource Fire}"/>
+
+                    <Label x:Name="BackpackLabel"
+                           Grid.Column="1"
+                           Text="Рюкзак порожній."
+                           TextColor="{StaticResource Parchment}"
+                           FontSize="13"
+                           VerticalOptions="Center"/>
+                </Grid>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+
+                <Button Grid.Column="0"
+                        Text="✚ Медпункт"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#2F4A4A"
+                        BorderColor="#5E9A9A"
+                        Clicked="OnMedicalClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="🌲 Ліс"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#24472A"
+                        BorderColor="#5FA060"
+                        Clicked="OnForestClicked"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SurvivalGame.Pages.BoarFightPage"
+    Title="Бій із кабаном">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#0A130E" Offset="0.0"/>
+            <GradientStop Color="#13241A" Offset="0.45"/>
+            <GradientStop Color="#1E2A1A" Offset="0.8"/>
+            <GradientStop Color="#2A2217" Offset="1.0"/>
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="Moss">#9CCB6B</Color>
+            <Color x:Key="Fire">#F2A541</Color>
+            <Color x:Key="Parchment">#EFE3C8</Color>
+            <Color x:Key="Bark">#3A2D20</Color>
+            <Color x:Key="BarkLight">#6B5236</Color>
+            <Color x:Key="PanelGreen">#1A2E20</Color>
+            <Color x:Key="PanelStroke">#3F6B45</Color>
+
+            <Style x:Key="ActionStyle" TargetType="Button">
+                <Setter Property="TextColor" Value="{StaticResource Parchment}"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="HeightRequest" Value="38"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="BorderWidth" Value="1"/>
+                <Setter Property="Padding" Value="4,0"/>
+            </Style>
+
+            <Style x:Key="MoveStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource Bark}"/>
+                <Setter Property="BorderColor" Value="{StaticResource BarkLight}"/>
+                <Setter Property="BorderWidth" Value="2"/>
+                <Setter Property="CornerRadius" Value="10"/>
+                <Setter Property="TextColor" Value="{StaticResource Parchment}"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HeightRequest" Value="56"/>
+                <Setter Property="Padding" Value="2"/>
+            </Style>
+
+            <Style x:Key="SectionTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="{StaticResource Moss}"/>
+                <Setter Property="CharacterSpacing" Value="2"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="12,8" Spacing="8">
+
+            <VerticalStackLayout Spacing="0">
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="8">
+                    <Label Text="🌲" FontSize="24" VerticalOptions="Center" Opacity="0.8"/>
+                    <Label Text="🐗" FontSize="32" VerticalOptions="Center"/>
+                    <Label Text="ДИКИЙ КАБАН!"
+                           FontSize="20"
+                           FontAttributes="Bold"
+                           CharacterSpacing="3"
+                           TextColor="{StaticResource Parchment}"
+                           VerticalOptions="Center"/>
+                    <Label Text="🌲" FontSize="24" VerticalOptions="Center" Opacity="0.8"/>
+                </HorizontalStackLayout>
+
+                <Label Text="Кабан перегородив тобі дорогу!"
+                       FontSize="12"
+                       FontAttributes="Italic"
+                       TextColor="{StaticResource Fire}"
+                       HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+
+            <Border BackgroundColor="{StaticResource PanelGreen}"
+                    Stroke="{StaticResource PanelStroke}"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,8">
+                <VerticalStackLayout Spacing="4">
+                    <Label x:Name="PlayerHealthLabel"
+                           Text="❤️ Твоє здоров'я: 100 / 100"
+                           FontSize="14"
+                           TextColor="#FF9A8B"/>
+
+                    <Label x:Name="BoarHealthLabel"
+                           Text="🐗 Здоров'я кабана: 3 / 3"
+                           FontSize="14"
+                           TextColor="{StaticResource Fire}"/>
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#16241A"
+                    Stroke="{StaticResource BarkLight}"
+                    StrokeThickness="2"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="8">
+                <VerticalStackLayout Spacing="6">
+
+                    <Label Text="⚔️ ОБЕРИ СВІЙ ХІД"
+                           Style="{StaticResource SectionTitle}"/>
+
+                    <Grid ColumnDefinitions="*,*,*" ColumnSpacing="5">
+                        <Button Grid.Column="0"
+                                Text="✊ Камінь"
+                                Style="{StaticResource MoveStyle}"
+                                Clicked="OnRockClicked"/>
+
+                        <Button Grid.Column="1"
+                                Text="✌️ Ножиці"
+                                Style="{StaticResource MoveStyle}"
+                                Clicked="OnScissorsClicked"/>
+
+                        <Button Grid.Column="2"
+                                Text="✋ Папір"
+                                Style="{StaticResource MoveStyle}"
+                                Clicked="OnPaperClicked"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <Border BackgroundColor="#2A2217"
+                    Stroke="{StaticResource BarkLight}"
+                    StrokeThickness="1.5"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="10,8">
+                <Label x:Name="ResultLabel"
+                       Text="Перемагай, щоб продовжити шлях!"
+                       FontSize="14"
+                       TextColor="{StaticResource Parchment}"
+                       HorizontalTextAlignment="Center"/>
+            </Border>
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                <Button Grid.Column="0"
+                        Text="🩹 Аптечка (+20 HP)"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#8A3B34"
+                        BorderColor="#C0665D"
+                        Clicked="OnUseMedkitClicked"/>
+
+                <Button Grid.Column="1"
+                        Text="🌲 До лісу"
+                        Style="{StaticResource ActionStyle}"
+                        BackgroundColor="#24472A"
+                        BorderColor="#5FA060"
+                        Clicked="OnBackClicked"/>
+            </Grid>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
